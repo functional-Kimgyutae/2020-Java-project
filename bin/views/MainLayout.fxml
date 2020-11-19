@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainController">
+   <children>
+      <Pane layoutX="25.0" layoutY="23.0" prefHeight="555.0" prefWidth="555.0" styleClass="pane" AnchorPane.topAnchor="23.0">
+         <children>
+            <Canvas fx:id="canvas" height="546.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#clickHandler" onMouseMoved="#MouseMove" styleClass="canvas" width="546.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="625.0" layoutY="45.0" prefHeight="100.0" prefWidth="100.0" styleClass="user1" />
+      <Label fx:id="user1" alignment="CENTER" layoutX="648.0" layoutY="157.0" text="USER 1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="user2" alignment="CENTER" layoutX="648.0" layoutY="518.0" text="COM">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Pane layoutX="625.0" layoutY="402.0" prefHeight="100.0" prefWidth="100.0" styleClass="user2" />
+      <Label fx:id="trun" layoutX="607.0" layoutY="290.0" text="1대1 대전">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="738.0" layoutY="23.0" mnemonicParsing="false" onAction="#startBtn" text="start" />
+      <Button layoutX="742.0" layoutY="555.0" mnemonicParsing="false" onAction="#out" text="out" />
+      <Label fx:id="winning" layoutX="625.0" layoutY="197.0" prefHeight="15.0" prefWidth="115.0" text="Label" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="Stl" prefHeight="600.0" prefWidth="800.0" styleClass="bg" stylesheets="@../cssPackage/StartLayout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.StartController">
+   <children>
+      <Button layoutX="366.0" layoutY="435.0" mnemonicParsing="false" onAction="#start" prefHeight="83.0" prefWidth="83.0" styleClass="start" stylesheets="@../cssPackage/StartLayout.css" text="시작" />
+   </children>
+</AnchorPane>

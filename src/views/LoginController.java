@@ -1,0 +1,86 @@
+package views;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import application.Main;
+import domain.UserVO;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import object.Player;
+import util.JDBCUtil;
+import util.Util;
+
+public class LoginController extends MasterController {
+	@FXML
+	private TextField txtId;
+	
+	@FXML
+	private PasswordField passField;
+	
+	@FXML
+	private AnchorPane lp;
+	public void loginProcess() {
+		String id = txtId.getText();
+		String pass= passField.getText();
+		if(id.isEmpty() || pass.isEmpty()) {
+			Util.showAlert("에러", "아이디나 비밀번호는 비어있을 수 없습니다.", AlertType.ERROR);
+			return;
+		}
+		UserVO user = checkLogin(id,pass);
+		
+		if(user != null) {
+			
+			Main.app.slideOut(getRoot());
+			Main.app.player = new Player();
+			Main.app.player.Player(id);
+			MainController mainController = (MainController) Main.app.getController("Main");
+			mainController.startRoom();
+			Main.app.loadPane("Main");
+			
+		}else {
+			Util.showAlert("에러", "존재하지 않는 아이디이거나 틀린 비밀번호입니다.", AlertType.ERROR);
+			return;
+		}
+	}
+	
+	public void go_register() {
+		Main.app.loadPane("Register");
+		Main.app.slideOut(getRoot());
+	}
+	
+	
+	private UserVO checkLogin(String id , String pw) {
+		Connection con = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM Java_project_users WHERE id = ? AND password = PASSWORD(?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			rs = pstmt.executeQuery();
+
+			
+			if(rs.next()) {
+				UserVO user = new UserVO();
+				user.setId(rs.getString("id"));
+				user.setName(rs.getString("user_name"));
+				return user;
+			}
+			return null;
+		} catch (Exception e) {
+			Util.showAlert("에러", "데이터베이스 처리중 오류 발생. 인터넷 연결을 확인하세요", AlertType.ERROR);
+			return null;
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(con);
+		}	
+	}
+}

@@ -1,0 +1,12 @@
+/* */
+
+.start {
+	-fx-background-radius: 100000px;
+	-fx-text-fill: #fff;
+	-fx-background-color: #000;
+}
+
+.bg {
+	-fx-background-image: url(/image/bgc.png);
+	-fx-background-size: 100% 100% ; 
+}
