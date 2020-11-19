@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainController">
    <children>
       <Pane layoutX="25.0" layoutY="23.0" prefHeight="555.0" prefWidth="555.0" styleClass="pane" AnchorPane.topAnchor="23.0">
          <children>
@@ -31,8 +31,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="738.0" layoutY="23.0" mnemonicParsing="false" onAction="#startBtn" text="start" />
-      <Button layoutX="742.0" layoutY="555.0" mnemonicParsing="false" onAction="#out" text="out" />
+      <Button fx:id="startbtn" layoutX="738.0" layoutY="23.0" mnemonicParsing="false" onAction="#startBtn" text="start" />
+      <Button fx:id="out" layoutX="742.0" layoutY="555.0" mnemonicParsing="false" onAction="#out" text="out" />
       <Label fx:id="winning" layoutX="625.0" layoutY="197.0" prefHeight="15.0" prefWidth="115.0" text="Label" />
    </children>
 </AnchorPane>

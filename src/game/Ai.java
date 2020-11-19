@@ -319,8 +319,18 @@ public class Ai {
 				for (int i = -2; i < 3; i++) {
 					if(x +i >= 0 && x+i < this.board.length) {
 						if(board[y][x+i] != 1 &&  board[y][x+i] != 2 &&attck[y][x+i] != 1 && attck[y][x+i] !=2) {
-							attck[y][x+i] -= 1000;
+							attck[y][x+i] -= 100000;
 							System.out.println("- : 4 ["+y+"] ["+x+"]");
+						}
+					}
+				}
+			}else if(danger(blockLine, emptyLine, blockCnt, emptyCnt) == 2) {
+				// 중요도 -50
+				for (int i = -2; i < 3; i++) {
+					if(x +i >= 0 && x+i < this.board.length ) {
+						if(board[y][x+i] != 1 &&  board[y][x+i] != 2 &&attck[y][x+i] != 1 && attck[y][x+i] !=2 ) {
+							System.out.println("- : 3 ["+y+"] ["+x+"]");
+							attck[y][x+i] -= 100;
 						}
 					}
 				}
@@ -360,8 +370,18 @@ public class Ai {
 				for (int i = -2; i < 3; i++) {
 					if(y +i >= 0 && y+i < this.board.length) {
 						if(board[y+i][x] != 1 && board[y+i][x] != 2 &&attck[y+i][x] != 1 && attck[y+i][x] !=2) {
-							attck[y+i][x] -= 1000;
+							attck[y+i][x] -= 10000;
 							System.out.println("| : 4 ["+y+"] ["+x+"]");
+						}
+					}
+				}
+			}else if(danger(blockLine, emptyLine, blockCnt, emptyCnt) == 2) {
+				// 중요도 -50
+				for (int i = -2; i < 3; i++) {
+					if(y +i >= 0 && y+i < this.board.length) {
+						if(board[y+i][x] != 1 && board[y+i][x] != 2&&attck[y+i][x] != 1 && attck[y+i][x] !=2 ) {
+							attck[y+i][x] -= 100;
+							System.out.println("| : 3 ["+y+"] ["+x+"]");
 						}
 					}
 				}
@@ -400,8 +420,18 @@ public class Ai {
 				for (int i = -2; i < 3; i++) {
 					if(x +i >= 0 && x+i < this.board.length && y +i >= 0 && y+i < this.board.length) {
 						if(board[y+i][x+i] != 1 && board[y+i][x+i] != 2&&attck[y+i][x+i] != 1 && attck[y+i][x+i] !=2) {
-							attck[y+i][x+i] -= 1000;
+							attck[y+i][x+i] -= 10000;
 							System.out.println("\\ : 4 ["+y+"] ["+x+"]");
+						}
+					}
+				}
+			}else if(danger(blockLine, emptyLine, blockCnt, emptyCnt) == 2) {
+				// 중요도 -50
+				for (int i = -2; i < 3; i++) {
+					if(x +i >= 0 && x+i < this.board.length && y +i >= 0 && y+i < this.board.length) {
+						if(board[y+i][x+i] != 1 && board[y+i][x+i] != 2&&attck[y+i][x+i] != 1 && attck[y+i][x+i] !=2) {
+							attck[y+i][x+i] -= 100;
+							System.out.println("\\ : 3 ["+y+"] ["+x+"]");
 						}
 					}
 				}
@@ -440,14 +470,28 @@ public class Ai {
 				for (int i = -2; i < 3; i++) {
 					if(x +i >= 0 && x+i < this.board.length && y -i >= 0 && y-i < this.board.length) {
 						if(board[y-i][x+i] != 1 && board[y-i][x+i] != 2&&attck[y-i][x+i] != 1 && attck[y-i][x+i] !=2) {
-							attck[y-i][x+i] -= 1000;
+							attck[y-i][x+i] -= 10000;
 							System.out.println("/ : 4 ["+y+"] ["+x+"]");
+						}
+					}
+				}
+			}else if(danger(blockLine, emptyLine, blockCnt, emptyCnt) == 2) {
+				// 중요도 -50
+				for (int i = -2; i < 3; i++) {
+					if(x +i >= 0 && x+i < this.board.length && y -i >= 0 && y-i < this.board.length) {
+						if(board[y-i][x+i] != 1 && board[y-i][x+i] != 2&&attck[y-i][x+i] != 1 && attck[y-i][x+i] !=2) {
+							attck[y-i][x+i] -= 100;
+							System.out.println("/ : 3 ["+y+"] ["+x+"]");
 						}
 					}
 				}
 			}
 		}
 	}
+	
+	
+	
+	
 	public void emptyattck(int y,int x) {
 		int isFive = 0;
 		for (int i = -2; i < 3; i++) {

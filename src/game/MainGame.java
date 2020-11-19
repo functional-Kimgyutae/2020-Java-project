@@ -1,5 +1,6 @@
 package game;
 
+import application.Main;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,21 +16,22 @@ public class MainGame {
 	public Canvas canvas;
 	private static int[][] board;
 	public int turn = 1;
-	private static MainController mc;
+	private static MainController mc = (MainController) Main.app.getController("Main");;
 	private static int x_len = 16;
 	private static int y_len = 16;
 	private static boolean isStart = false;
 	private Ai ai;
 
-	public MainGame(Canvas canvas, MainController mc) {
-		if (isStart) {
-			return;
-		}
+	public MainGame(Canvas canvas) {
 		isStart = true;
 		this.canvas = canvas;
-		this.mc = mc;
+		System.out.println("캔버스 생김");
 		this.gc = this.canvas.getGraphicsContext2D();
-		; // canvas 媛��졇�삤湲�
+		init();
+		ai = new Ai();
+	}
+	
+	public void init() {
 		board = new int[x_len][y_len]; // �뙋 諛곗뿴 �젣�옉
 		for (int i = 0; i < y_len; i++) { // 諛곗뿴 湲곕낯媛�
 			for (int j = 0; j < x_len; j++) {
@@ -37,7 +39,6 @@ public class MainGame {
 			}
 		}
 		render();
-		ai = new Ai();
 	}
 	
 	public boolean out() {
@@ -47,7 +48,7 @@ public class MainGame {
 			}
 		}
 		render();
-		if(!isStart) {
+		if(isStart) {
 			return true;
 		}else {
 			return false;			
@@ -161,8 +162,7 @@ public class MainGame {
 				if (board[y][x + i] == turn) {
 					isFive++;
 					if (isFive == 5) {
-						System.out.println(x + " " + y + "좌표로 부터 생김-");
-						System.out.println("5목 완성");
+						
 						end(turn);
 						break;
 					}
@@ -228,7 +228,6 @@ public class MainGame {
 
 	public static void end(int turn) {
 		mc.end(turn);
-
 		isStart = false;
 	}
 

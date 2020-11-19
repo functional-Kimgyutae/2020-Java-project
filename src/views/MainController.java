@@ -4,11 +4,12 @@ import application.Main;
 import game.MainGame;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 public class MainController extends MasterController {
-	private MainGame game;
+	private MainGame game = null;
 	@FXML
 	private Canvas canvas;
 	@FXML 
@@ -21,29 +22,40 @@ public class MainController extends MasterController {
 	@FXML 
 	private Label winning;
 	
+	@FXML
+	private Button startbtn;
+	
+	@FXML
+	private Button out;
+	
 	static boolean start = false;
 	public String name = "";
 	public int win = 0;
 	public int lose = 0;
+	
 	public void startRoom() {
 		init();
 		trun.setText("컴퓨터와의 대전");
+		game =	new MainGame(canvas);
+		startbtn.setDisable(true);
 	}
 	
 	public void startBtn() {
 		start = true;
 		if(start) {
-			System.out.println("start");
-			game =	new MainGame(canvas, this);
-			trun.setText(name+"'s turn");	
-			start = true;
+			startbtn.setDisable(true);
+			game =	new MainGame(canvas);
+			System.out.println(game);
+			trun.setText(name+"'s turn");
+			startbtn.setDisable(true);
 		}
 	}
 	public void init() {
 		name = Main.app.player.name();
 		win = Main.app.player.win();
 		lose = Main.app.player.lose();
-		user1.setText(name);
+		user1.setText(name);		
+		startbtn.setDisable(false);
 		setScore();
 	}
 	public void first() {
@@ -74,6 +86,7 @@ public class MainController extends MasterController {
 	
 	public void MouseMove(MouseEvent e) {
 		if(game == null) return;
+		System.out.println("a");
 		game.mouseMove(e);
 	}
 	
@@ -84,6 +97,10 @@ public class MainController extends MasterController {
 				Main.app.player.update();
 			}
 		}
+		start = false;
+		game.init();
+		startbtn.setDisable(false);
+		game = null;
 		Main.app.slideOut(getRoot());
 		Main.app.loadPane("login");
 	}
